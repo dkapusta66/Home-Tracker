@@ -26,6 +26,7 @@ export default function App() {
         name="DeadlineScreen" 
         component={DeadlinePage} 
         options={{ headerShown: false }}
+        initialParams={{ date: '00.00.0000' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useFonts } from 'expo-font';
-import { View, Text, SafeAreaView, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Collapsible from 'react-native-collapsible';
 import styles from './styles';
 
-function DeadlinePage({navigation, selectedDate}) {
+function DeadlinePage({route, navigation}) {
 
-  
-    pushedDate = selectedDate;
-    console.log(pushedDate)
-  
+
+  // Пример использования
+
+  const { data } = route.params;
+
+
     const handlePress = () => {
       Alert.alert('Button pressed', 'You pressed the button!');
     };
@@ -177,7 +180,7 @@ function DeadlinePage({navigation, selectedDate}) {
           </TouchableOpacity>
         </View>
         <View style={styles.TasksDeadlinePageContainer}>
-          <Text style={styles.headerBlack}>{pushedDate}</Text>
+          <Text style={styles.headerBlack}>{data}</Text>
           <ScrollView style={styles.scrollableContainerTasksDeadlinePage}>
           {/* {linesData_PZ.map((data, index) => (
               <Line key={index} {...data} />

@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: "#fff",
     },
+    headerBlack: {
+      fontSize: 35,
+      fontWeight: 'bold',
+      color: "#000",
+    },
     headerPlus: {
       fontSize: 40,
       fontWeight: 'bold',

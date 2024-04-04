@@ -20,14 +20,9 @@ function HomeScreen({ navigation }) {
     ];
 
 
-    
+    handler = (date)=>{navigation.navigate('DeadlineScreen', {data: date})}    
 
 
-
-
-
-  
-    handler = (date)=>{navigation.navigate('DeadlineScreen'), { selectedDate: date}}
   
     const [collapsedItems, setCollapsedItems] = useState(Array(3).fill(true));
   
@@ -85,13 +80,11 @@ function HomeScreen({ navigation }) {
         deadline_text_style = 'deadlineDay';
       }
 
-
-
     
       return (
           <TouchableOpacity
             style={isCollapsible ? styles.TaskPZButton : styles.deadlineButton}
-            onPress={isCollapsible ? () => toggleCollapse(index) : handler} // Обратите внимание, что я убрал лишнюю функцию в вызове handlePress
+            onPress={isCollapsible ? () => toggleCollapse(index) : ()=>handler(date)} // Обратите внимание, что я убрал лишнюю функцию в вызове handlePress
           >
   
           <View style={styles.deadlineDate}>
