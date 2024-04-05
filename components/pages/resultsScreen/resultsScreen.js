@@ -7,12 +7,35 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Collapsible from 'react-native-collapsible';
 import styles from './styles';
 
-function DeadlinePage({route, navigation}) {
+function ResultsScreen({route, navigation}) {
 
+
+
+  const linesData = [
+    { name: "Гейчик Евгений", isCollapsible: false, index: 1, number: "5",
+      inner:{
+        score: '9.7/10'
+      }
+    },
+    { name: "Гейчик Евгений", isCollapsible: false, index: 1, number: "5",
+      inner:{
+        score: 'Сдано'
+      }
+    },
+    { name: "Абобус (real name)", isCollapsible: false, index: 1, number: "5",
+      inner:{
+        score: ''
+      }
+    },
+    // Добавьте другие объекты данных, если необходимо
+  ];
+
+
+  handler = () =>{navigation.navigate("DeadlineScreen", {data: data, count: count})}
 
   // Пример использования
 
-  const { data } = route.params;
+  let {task, name, data, count } = route.params;
 
 
     const handlePress = () => {
@@ -90,80 +113,51 @@ function DeadlinePage({route, navigation}) {
   
   
     
-    const Line = ({date, number, isCollapsible, collapse, index, inner}) => {
+    const Line = ({name, time, number, isCollapsible, collapse, index, inner}) => {
       // Получаем текущую дату
-      const currentDate = new Date();
-      const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-      const currentDay = currentDate.getDate().toString().padStart(2, '0');    
-      const currentYear = currentDate.getFullYear();
+      // const currentDate = new Date();
+      // const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+      // const currentDay = currentDate.getDate().toString().padStart(2, '0');    
+      // const currentYear = currentDate.getFullYear();
     
-      // Преобразуем дату в формат "ДД.ММ.ГГГГ"
-      const formattedCurrentDate = `${currentDay}.${currentMonth}.${currentYear}`;
+      // // Преобразуем дату в формат "ДД.ММ.ГГГГ"
+      // const formattedCurrentDate = `${currentDay}.${currentMonth}.${currentYear}`;
     
-      // Преобразуем переданную дату в формат "ДД.ММ.ГГГГ"
+      // // Преобразуем переданную дату в формат "ДД.ММ.ГГГГ"
   
-      const formattedDate = date;
+      // const formattedDate = date;
   
     
-      // Определяем текст для отображения в зависимости от сравнения
-      let displayText = '';
-      if (formattedDate === formattedCurrentDate) {
-        displayText = 'СЕГОДНЯ';
-      } else {
-        tomorrowDay = currentDate.getDate()+1;
-        tomorrowDay = tomorrowDay.toString().padStart(2, '0')
-        const formattedTomorrowDate = `${tomorrowDay}.${currentMonth}.${currentYear}`;
+      // // Определяем текст для отображения в зависимости от сравнения
+      // let displayText = '';
+      // if (formattedDate === formattedCurrentDate) {
+      //   displayText = 'СЕГОДНЯ';
+      // } else {
+      //   tomorrowDay = currentDate.getDate()+1;
+      //   tomorrowDay = tomorrowDay.toString().padStart(2, '0')
+      //   const formattedTomorrowDate = `${tomorrowDay}.${currentMonth}.${currentYear}`;
     
-        if (formattedDate === formattedTomorrowDate) {
-          displayText = 'ЗАВТРА';
-        } else {
-          // Если не "СЕГОДНЯ" и не "ЗАВТРА", то отображаем просто дату
-          displayText = date;
-        }
-      }
+      //   if (formattedDate === formattedTomorrowDate) {
+      //     displayText = 'ЗАВТРА';
+      //   } else {
+      //     // Если не "СЕГОДНЯ" и не "ЗАВТРА", то отображаем просто дату
+      //     displayText = date;
+      //   }
+      // }
     
       return (
         <TouchableOpacity
-        style={isCollapsible ? styles.TaskPZButton : styles.deadlineButton}
-        onPress={collapse} // Теперь используем toggleCollapse из объекта inner
+        style={styles.DynamicContainer}
+        onPress={handlePress} // Теперь используем toggleCollapse из объекта inner
       >
-  
-          <View style={styles.PZDate}>
-            <Text style={styles.deadlineDay}>{displayText}</Text>
-            <Text style={styles.deadlineNumber}>{number}</Text>
+          <View style={styles.contHeader}>
+            <Text style={styles.deadlineDay}>{name}</Text>
+            <Text style={styles.deadlineDay}>{inner.score}</Text>
           </View>
-          {isCollapsible && (
-            <Collapsible collapsed={collapsedItems[index]}>
-                <View>
-                  <View style={styles.PZCollapsedElement}>
-                    <TouchableOpacity>
-                      <View style={styles.PZDate}>
-                        <Text style={styles.tasksSubtitle}>{inner.name_1}</Text>
-                        <Text style={styles.tasksSubtitle}>{inner.task_1}</Text>
-                      </View>
-                      <Text style={styles.tasksSubtitle}>{inner.theme_1}</Text>
-                      <Text style={styles.subtitle}>{inner.addTheme_1}</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.PZCollapsedElement}>
-                    <TouchableOpacity>
-                      <View style={styles.PZDate}>
-                        <Text style={styles.tasksSubtitle}>{inner.name_2}</Text>
-                        <Text style={styles.subtitle}>{inner.task_2}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.PZCollapsedElement}>
-                    <TouchableOpacity>
-                      <View style={styles.PZDate}>
-                        <Text style={styles.tasksSubtitle}>{inner.name_3}</Text>
-                        <Text style={styles.subtitle}>{inner.task_3}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                </Collapsible>
-        )}
+          <Text style={styles.headerBlack}>{inner.task}</Text>
+          <View style={styles.results}>
+            <Text style={styles.subtitle}>Посмотреть заметки</Text><Text style={styles.deadlineDay}>↘</Text>
+          </View>
       </TouchableOpacity>
     );
   };
@@ -179,15 +173,18 @@ function DeadlinePage({route, navigation}) {
             <View style={styles.rectangle}></View>
           </TouchableOpacity>
         </View>
-        <View style={styles.TasksDeadlinePageContainer}>
-          <Text style={styles.headerBlack}>{data}</Text>
-          <ScrollView style={styles.scrollableContainerTasksDeadlinePage}>
-          {/* {linesData_PZ.map((data, index) => (
+        <View style={styles.TasksContainer}>
+          <View style={styles.contHeader}>
+            <Text style={styles.headerBlack}>{name}</Text>
+            <Text style={styles.headerBlack}>{task}</Text>
+          </View>
+          <ScrollView style={styles.scrollableContainerTasks}>
+          {linesData.map((data, index) => (
               <Line key={index} {...data} />
-            ))} */}
+            ))}
           </ScrollView>
         </View>
-        <TouchableOpacity style={styles.BackButton} onPress={()=>{navigation.navigate("HomeScreen")}}>
+        <TouchableOpacity style={styles.BackButton} onPress={()=>handler()}>
           <Text style={styles.header}>Назад</Text>
           <Text style={styles.headerPlus}>⟶</Text>
         </TouchableOpacity>
@@ -195,4 +192,4 @@ function DeadlinePage({route, navigation}) {
     );
   }
 
-export default DeadlinePage;
+export default ResultsScreen;

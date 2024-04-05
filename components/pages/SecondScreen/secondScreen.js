@@ -29,7 +29,7 @@ function SecondScreen({navigation}) {
     };
   
     
-  const linesData_PZ = [
+  const linesData = [
     { 
       date: "02.04.2024", 
       time: '', 
@@ -180,7 +180,7 @@ function SecondScreen({navigation}) {
         <View style={styles.TasksPZContainer}>
           <Text style={styles.headerBlack}>Задания на ПЗ</Text>
           <ScrollView style={styles.scrollableContainerTasksPZ}>
-          {linesData_PZ.map((data, index) => (
+          {linesData.map((data, index) => (
               <Line key={index} {...data} />
             ))}
             {/* {Array.from({ length: 5 }, (_, index) => (

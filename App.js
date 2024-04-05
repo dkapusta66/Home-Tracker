@@ -1,8 +1,13 @@
+import React, { useCallback } from 'react'; // Import useCallback from react
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DeadlinePage from './components/pages/deadlinePage/deadlinePage'
+import * as SplashScreen from 'expo-splash-screen';
+import DeadlineScreen from './components/pages/deadlineScreen/deadlineScreen'
 import SecondScreen from './components/pages/SecondScreen/secondScreen'
 import HomeScreen from './components/pages/HomeScreen/HomeScreen';
+import ResultsScreen from './components/pages/resultsScreen/resultsScreen';
+import { useFonts } from 'expo-font';
+
 
 
 
@@ -24,9 +29,15 @@ export default function App() {
         />
         <Stack.Screen 
         name="DeadlineScreen" 
-        component={DeadlinePage} 
+        component={DeadlineScreen} 
         options={{ headerShown: false }}
-        initialParams={{ date: '00.00.0000' }}
+        initialParams={{ date: '00.00.0000', number: "1"}}
+        />
+        <Stack.Screen 
+        name="resultsScreen" 
+        component={ResultsScreen} 
+        options={{ headerShown: false }}
+        initialParams={{ date: '00.00.0000', number: "1"}}
         />
       </Stack.Navigator>
     </NavigationContainer>

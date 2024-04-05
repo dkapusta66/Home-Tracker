@@ -10,17 +10,17 @@ function HomeScreen({ navigation }) {
 
 
 
-    const linesData_Deadline = [
-      { date: "02.04.2024", time: "23:15", isCollapsible: false, index: 1, number: "1" },
+    const linesData = [
+      { date: "05.04.2024", time: "23:15", isCollapsible: false, index: 1, number: "1" },
       { date: "03.04.2024", time: "00:00", isCollapsible: false, index: 2, number: "0" },
-      { date: "21.04.2024", time: "10:05", isCollapsible: false, index: 3, number: "5" },
+      { date: "21.04.2024", time: "10:05", isCollapsible: false, index: 3, number: "2" },
       { date: "21.26.2024", time: "10:05", isCollapsible: false, index: 4, number: "5" },
       { date: "21.26.2024", time: "10:05", isCollapsible: false, index: 5, number: "5" },
       // Добавьте другие объекты данных, если необходимо
     ];
 
 
-    handler = (date)=>{navigation.navigate('DeadlineScreen', {data: date})}    
+    handler = (displayText, number)=>{navigation.navigate('DeadlineScreen', {data: displayText, count: number})}    
 
 
   
@@ -56,7 +56,6 @@ function HomeScreen({ navigation }) {
         tomorrowDay = currentDate.getDate()+1;
         tomorrowDay = tomorrowDay.toString().padStart(2, '0')
         const formattedTomorrowDate = `${tomorrowDay}.${currentMonth}.${currentYear}`;
-        console.log(formattedTomorrowDate )
     
         if (formattedDate === formattedTomorrowDate) {
           displayText = 'ЗАВТРА';
@@ -84,7 +83,7 @@ function HomeScreen({ navigation }) {
       return (
           <TouchableOpacity
             style={isCollapsible ? styles.TaskPZButton : styles.deadlineButton}
-            onPress={isCollapsible ? () => toggleCollapse(index) : ()=>handler(date)} // Обратите внимание, что я убрал лишнюю функцию в вызове handlePress
+            onPress={()=>handler(number, displayText)} // Обратите внимание, что я убрал лишнюю функцию в вызове handlePress
           >
   
           <View style={styles.deadlineDate}>
@@ -163,7 +162,7 @@ function HomeScreen({ navigation }) {
           <Text style={styles.header}>Дедлайны</Text>
           <ScrollView style={styles.scrollableContainerDeadline}>
   
-          {linesData_Deadline.map((data, index) => (
+          {linesData.map((data, index) => (
               <Line key={index} {...data} />
             ))}
   

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFonts } from 'expo-font';
 import { StyleSheet, StatusBar} from 'react-native';
+import colors from '../../ColorPalette/colorPalette';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'center',
       paddingVertical: "4%",
       paddingHorizontal: "4%",
@@ -26,26 +27,46 @@ const styles = StyleSheet.create({
       rectangle: {
         width: 8,
         height: 40,
-        backgroundColor: '#FFA18A',
+        backgroundColor: colors.primary,
         borderRadius: 12,
         transform: 'rotate(25deg)',
         marginHorizontal: 5,
       },
-    TasksDeadlinePageContainer: {
+    TasksContainer: {
       width: '90%',
       height: '75%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       alignItems: 'Left',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
       marginTop: "4%",
       borderRadius: 25,
     },
-    scrollableContainerDeadlinePage:{
+    contHeader:{
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    scrollableContainer:{
         marginBottom: '5%'
-      },
+    },
+    DynamicContainer:{
+      marginTop: '5%',
+      width: '100%',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignSelf: 'center',
+      borderRadius: 25,
+      paddingHorizontal: '5%',
+      paddingVertical: '5%',
+      backgroundColor: '#fff',
+    },
+    results:{
+      marginTop: '10%',
+      width: '100%',
+      flexDirection: 'row-reverse'
+    },
     deadlineDate:{
       flexDirection: 'row',
     },
@@ -83,7 +104,7 @@ const styles = StyleSheet.create({
     subtitle: {
       fontSize: 15,
       fontWeight: 'bold',
-      color: "#fff",
+      color: "#000",
       alignSelf: 'center'
     },
     tasksSubtitleRed: {
@@ -92,7 +113,7 @@ const styles = StyleSheet.create({
       color: "#FFA18A",
     },
     BackButton:{
-        backgroundColor: "#52716B",
+        backgroundColor: colors.secondary,
         width: "90%",
         height: "8%",
         marginTop: "4%",

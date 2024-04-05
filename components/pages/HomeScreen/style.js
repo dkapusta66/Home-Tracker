@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useFonts } from 'expo-font';
 import { View, Text, SafeAreaView, StyleSheet, StatusBar, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import colors from '../../ColorPalette/colorPalette';
 
 const styles = StyleSheet.create({
+
+  
     container: {
       flex: 1,
       backgroundColor: '#000',
@@ -13,7 +16,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'center',
       paddingVertical: "4%",
       paddingHorizontal: "4%",
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
     rectangle: {
       width: 8,
       height: 40,
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       borderRadius: 12,
       transform: 'rotate(25deg)',
       marginHorizontal: 5,
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'center',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
       height: '40%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       alignItems: 'Left',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
@@ -102,7 +105,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'Left',
       paddingVertical: "3%",
       paddingHorizontal: 15,
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
     tasksSubtitleRed: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: "#FFA18A",
+      color: colors.primary,
     },
     tasksSubtitleGreen: {
       fontSize: 20,

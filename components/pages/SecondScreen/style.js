@@ -1,4 +1,5 @@
 import { StyleSheet, StatusBar} from 'react-native';
+import colors from '../../ColorPalette/colorPalette';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'center',
       paddingVertical: "4%",
       paddingHorizontal: "4%",
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'center',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
       height: '40%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       alignItems: 'Left',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
       height: '70%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       alignItems: 'Left',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
       height: '75%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       alignItems: 'Left',
       paddingVertical: "1%",
       paddingHorizontal: "4%",
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
       borderRadius: 25,
     },
     BackButton:{
-      backgroundColor: "#52716B",
+      backgroundColor: colors.secondary,
       width: "90%",
       height: "8%",
       marginTop: "4%",
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
       width: '90%',
       flexDirection: 'column',
       // justifyContent: 'space-between',
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       alignItems: 'Left',
       paddingVertical: "3%",
       paddingHorizontal: 15,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     },
     PZCollapsedElement:{
-      backgroundColor: '#52716B',
+      backgroundColor: colors.secondary,
       marginTop: '5%',
       paddingHorizontal: '2%',
       paddingVertical: '2%',
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       flexDirection: 'row', 
       marginBottom: '5%',
-      color: '#FFA18A'
+      color: colors.primary
     },
     ShowMoreTasks:{
       alignSelf: 'flex-end',
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
     tasksSubtitleRed: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: "#FFA18A",
+      color: colors.primary
     },
     tasksSubtitleGreen: {
       fontSize: 20,
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
     rectangle: {
       width: 8,
       height: 40,
-      backgroundColor: '#FFA18A',
+      backgroundColor: colors.primary,
       borderRadius: 12,
       transform: 'rotate(25deg)',
       marginHorizontal: 5,
