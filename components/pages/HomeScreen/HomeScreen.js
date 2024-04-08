@@ -5,6 +5,8 @@ import styles from './style';
 import { createClient } from '@supabase/supabase-js';
 
 function HomeScreen({ navigation }) {
+
+  
   const [linesData, setLinesData] = useState([]);
 
   useEffect(() => {
@@ -53,7 +55,7 @@ function HomeScreen({ navigation }) {
 
 
         
-        return { date: formatDate(deadline.Date), number: tasks.length };
+        return { date: formatDate(deadline.Date), number: tasks.length};
       });
 
       const data = await Promise.all(promises);

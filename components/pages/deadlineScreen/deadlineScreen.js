@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useFonts } from 'expo-font';
 import { View, Text, SafeAreaView, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,25 +6,103 @@ import { useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Collapsible from 'react-native-collapsible';
 import styles from './styles';
+import { createClient } from '@supabase/supabase-js';
 
 function DeadlineScreen({route, navigation}) {
-
-
-
-  const linesData = [
-    { name: "ИТ", time: "23.05", isCollapsible: false, id: 1234, number: "5",
-      inner:{
-        task: 'Тест по БД.2'
-      }
-    },
-    // Добавьте другие объекты данных, если необходимо
-  ];
-
 
   // Пример использования
 
   let { data, count } = route.params;
 
+
+  function convertDateToISO(dateString) {
+    // Разбиваем строку на части по точке
+    const parts = dateString.split('.');
+    // Проверяем, что дата состоит из трех частей (день, месяц, год)
+    if (parts.length === 3) {
+        // Переставляем части местами и соединяем их через дефис
+        const isoDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+        return isoDate;
+    } else {
+        // Возвращаем null, если входная строка имеет неверный формат
+        return null;
+    }
+}
+  const filterDate = convertDateToISO(data);
+
+  const [linesData, setLinesData] = useState([]);
+
+
+  const formatDate = (dateString) => {
+    const parts = dateString.split('-');
+    if (parts.length === 3) {
+      const day = parts[2].padStart(2, '0');
+      const month = parts[1].padStart(2, '0');
+      const year = parts[0];
+      return `${day}.${month}.${year}`;
+    }
+    return null; // Обработка неверного формата даты
+  };
+
+  useEffect(() => {
+    fetchData(filterDate); // Передаем filterDate в качестве аргумента
+}, [filterDate]);
+
+const fetchData = async (filterDate) => {
+  try {
+      const supabase = createClient(
+          'https://vwatdijcodvrpykqwylv.supabase.co',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3YXRkaWpjb2R2cnB5a3F3eWx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI0MTY2NzUsImV4cCI6MjAyNzk5MjY3NX0.D9hltWrPhMgBu8LAtdrwg_c6A9UPCKNVMzIiWWNMLEI'
+      );
+
+      const { data: tasks, error_dl } = await supabase
+          .from('Tasks')
+          .select('*')
+          .eq('Date', filterDate);
+        
+      if (error_dl) {
+          throw error_dl;
+      }
+
+      // Преобразуем полученные данные в формат, который можно использовать в вашем компоненте
+      const formattedTasks = tasks.map((task) => ({
+          name: task.Subject,
+          time: task.Time,
+          isCollapsible: false,
+          id: task.ID,
+          number: 1,
+          inner: task.Task
+      }));
+
+      // Сохраняем полученные данные в состоянии компонента
+      setLinesData(formattedTasks);
+  } catch (error) {
+      console.error('Error fetching data:', error.message);
+      setLinesData([]); // Очищаем состояние в случае ошибки
+  }
+};
+
+
+const Line = ({ name, time, number, isCollapsible, id, inner }) => {
+  // Проверяем наличие объекта inner и свойства task
+  const task = inner;
+
+  return (
+      <TouchableOpacity
+          style={styles.DynamicContainer}
+          onPress={() => { handler(task, name, data, count) }}
+      >
+          <View style={styles.contHeader}>
+              <Text style={styles.deadlineDay}>{name}</Text>
+              <Text style={styles.subtitle}>{time}</Text>
+          </View>
+          <Text style={styles.deadlineDay}>{task}</Text>
+          <View style={styles.results}>
+              <Text style={styles.subtitle}>Результаты одногруппников</Text>
+          </View>
+      </TouchableOpacity>
+  );
+};
 
     const handlePress = () => {
       Alert.alert('Button pressed', 'You pressed the button!');
@@ -49,108 +127,6 @@ function DeadlineScreen({route, navigation}) {
   
     handler = (task, name, data, count)=>{navigation.navigate('resultsScreen', {task: task, name: name, data: data, count:count}); count = 0; data = " ";}    
 
-
-  // const linesData_DeadlineTask = [
-  //   { 
-  //     date: "02.04.2024", 
-  //     time: '', 
-  //     isCollapsible: true, 
-  //     index: 1, 
-  //     number: "1",
-  //     collapse: () => {toggleCollapse(1)}, // Передаем toggleCollapse с нужным индексом
-  //     inner: {
-  //       name_1: "Микроэкономика",
-  //       task_1: "КР",
-  //       theme_1: "4-6 (до картеля)",
-  //       addTheme_1: "+Тема 7 - разбор",
-  //       name_2: "Вышмат",
-  //       task_2: "СР",
-  //       theme_2: "Посмотреть фото",
-  //       addTheme_2: "",
-  //       name_3: "ИБГ",
-  //       task_3: "Доклады",
-  //       theme_3: "Посмотреть фото",
-  //       addTheme_3: "",
-  //     },
-  //   },
-  //   { 
-  //     date: "03.04.2024",
-  //     time: "10:05", 
-  //     isCollapsible: true, 
-  //     index: 2, 
-  //     number: "5",
-  //     collapse: () => {toggleCollapse(2)}, // Передаем toggleCollapse с нужным индексом
-  //     inner: {
-  //       name_1: "Микроэкономика",
-  //       task_1: "КР",
-  //       theme_1: "4-6 (до картеля)",
-  //       addTheme_1: "+Тема 7 - разбор",
-  //       name_2: "Вышмат",
-  //       task_2: "СР",
-  //       theme_2: "Посмотреть фото",
-  //       addTheme_2: "",
-  //       name_3: "ИБГ",
-  //       task_3: "Доклады",
-  //       theme_3: "Посмотреть фото",
-  //       addTheme_3: "",
-  //     },
-  //   },
-  //   { date: "21.04.2024", time: "10:05", isCollapsible: false, index: 3, number: "5" },
-  //   { date: "21.26.2024", time: "10:05", isCollapsible: false, index: 4, number: "5" },
-  //   { date: "21.26.2024", time: "10:05", isCollapsible: false, index: 5, number: "5" },
-  //   // Добавьте другие объекты данных, если необходимо
-  // ];
-  
-  
-    
-    const Line = ({name, time, number, isCollapsible, collapse, id, inner}) => {
-      // Получаем текущую дату
-      // const currentDate = new Date();
-      // const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-      // const currentDay = currentDate.getDate().toString().padStart(2, '0');    
-      // const currentYear = currentDate.getFullYear();
-    
-      // // Преобразуем дату в формат "ДД.ММ.ГГГГ"
-      // const formattedCurrentDate = `${currentDay}.${currentMonth}.${currentYear}`;
-    
-      // // Преобразуем переданную дату в формат "ДД.ММ.ГГГГ"
-  
-      // const formattedDate = date;
-  
-    
-      // // Определяем текст для отображения в зависимости от сравнения
-      // let displayText = '';
-      // if (formattedDate === formattedCurrentDate) {
-      //   displayText = 'СЕГОДНЯ';
-      // } else {
-      //   tomorrowDay = currentDate.getDate()+1;
-      //   tomorrowDay = tomorrowDay.toString().padStart(2, '0')
-      //   const formattedTomorrowDate = `${tomorrowDay}.${currentMonth}.${currentYear}`;
-    
-      //   if (formattedDate === formattedTomorrowDate) {
-      //     displayText = 'ЗАВТРА';
-      //   } else {
-      //     // Если не "СЕГОДНЯ" и не "ЗАВТРА", то отображаем просто дату
-      //     displayText = date;
-      //   }
-      // }
-    
-      return (
-        <TouchableOpacity
-        style={styles.DynamicContainer}
-        onPress={()=>{handler(inner.task, name, data, count)}}
-      >
-          <View style={styles.contHeader}>
-            <Text style={styles.deadlineDay}>{name}</Text>
-            <Text style={styles.subtitle}>{time}</Text>
-          </View>
-          <Text style={styles.headerBlack}>{inner.task}</Text>
-          <View style={styles.results}>
-            <Text style={styles.subtitle}>Результаты одногруппников</Text>
-          </View>
-      </TouchableOpacity>
-    );
-  };
   
     return (
       <SafeAreaView style={styles.container}>
