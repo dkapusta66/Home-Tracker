@@ -47,7 +47,7 @@ function DeadlineScreen({route, navigation}) {
       setCollapsedItems(newCollapsedItems);
     };
   
-    handler = (task, name, data, count)=>{navigation.navigate('resultsScreen', {task: task, name: name, data: data, count:count}); count = 0; data = " "}    
+    handler = (task, name, data, count)=>{navigation.navigate('resultsScreen', {task: task, name: name, data: data, count:count}); count = 0; data = " ";}    
 
 
   // const linesData_DeadlineTask = [

@@ -4,7 +4,6 @@ import { View, Text, SafeAreaView, StyleSheet, StatusBar, TouchableOpacity, Aler
 import colors from '../../ColorPalette/colorPalette';
 
 const styles = StyleSheet.create({
-
   
     container: {
       flex: 1,
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
       paddingVertical: "4%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     button: {
       flexDirection: 'row',
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
       paddingVertical: "1%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     deadlineContainer: {
       width: '90%',
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
       paddingVertical: "1%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     scrollableContainerDeadline:{
       marginBottom: '5%'
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
       paddingVertical: "3%",
       paddingHorizontal: 15,
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     tasksWholeCount:{
       justifyContent: 'space-between',

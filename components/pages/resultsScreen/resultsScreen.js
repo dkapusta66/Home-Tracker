@@ -27,7 +27,17 @@ function ResultsScreen({route, navigation}) {
         score: ''
       }
     },
-    // Добавьте другие объекты данных, если необходимо
+    { name: "Абобус (real name)", isCollapsible: false, index: 1, number: "5",
+      inner:{
+        score: ''
+      }
+    },
+    { name: "Абобус (real name)", isCollapsible: false, index: 1, number: "5",
+      inner:{
+        score: ''
+      }
+    },
+    // позже будет подтянута БД
   ];
 
 

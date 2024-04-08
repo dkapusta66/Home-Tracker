@@ -30,7 +30,7 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/NeueMachina-Ultrabold.otf"]
+          "fonts": ["./assets/fonts/NeueMachina-Regular.otf"]
         }
       ]
     ]

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
       paddingVertical: "4%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     themeContainer: {
       width: '90%',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
       paddingVertical: "1%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     deadlineContainer: {
       width: '90%',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
       paddingVertical: "1%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     TasksDeadlinePageContainer: {
       width: '90%',
@@ -64,14 +64,14 @@ const styles = StyleSheet.create({
       paddingVertical: "1%",
       paddingHorizontal: "4%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     BackButton:{
       backgroundColor: colors.secondary,
       width: "90%",
       height: "8%",
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
       flexDirection: "row",
       alignItems: 'center',
       justifyContent: "space-between",
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
       paddingVertical: "3%",
       paddingHorizontal: 15,
       marginTop: "4%",
-      borderRadius: 25,
+      borderRadius: 20,
     },
     deadlineDate:{
       flexDirection: 'row',
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
       marginTop: '5%',
       paddingHorizontal: '2%',
       paddingVertical: '2%',
-      borderRadius: 25
+      borderRadius: 15
     },
     deadlineDay:{
       color: '#000',

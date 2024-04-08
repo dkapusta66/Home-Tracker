@@ -9,11 +9,11 @@ import ResultsScreen from './components/pages/resultsScreen/resultsScreen';
 import { useFonts } from 'expo-font';
 
 
-
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
