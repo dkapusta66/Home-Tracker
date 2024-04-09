@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useFonts } from 'expo-font';
 import { View, Text, SafeAreaView, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,46 +6,76 @@ import { useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Collapsible from 'react-native-collapsible';
 import styles from './styles';
+import { createClient } from '@supabase/supabase-js';
 
 function ResultsScreen({route, navigation}) {
 
 
+  // Пример использования
 
-  const linesData = [
-    { name: "Гейчик Евгений", isCollapsible: false, index: 1, number: "5",
-      inner:{
-        score: '9.7/10'
-      }
-    },
-    { name: "Гейчик Евгений", isCollapsible: false, index: 1, number: "5",
-      inner:{
-        score: 'Сдано'
-      }
-    },
-    { name: "Абобус (real name)", isCollapsible: false, index: 1, number: "5",
-      inner:{
-        score: ''
-      }
-    },
-    { name: "Абобус (real name)", isCollapsible: false, index: 1, number: "5",
-      inner:{
-        score: ''
-      }
-    },
-    { name: "Абобус (real name)", isCollapsible: false, index: 1, number: "5",
-      inner:{
-        score: ''
-      }
-    },
-    // позже будет подтянута БД
-  ];
+  const {task, name, data, count, id} = route.params;
+
+  const [linesData, setLinesData] = useState([]);
+
+  useEffect(() => {
+
+  // const linesData = [
+  //   { name: "Гейчик Евгений", isCollapsible: true, index: 1, number: "5",
+  //     inner:{
+  //       score: '9.7/10'
+  //     },
+  //     collapse: () => {toggleCollapse(2)},
+  //   },
+  //   // позже будет подтянута БД
+  // ];
 
 
   handler = () =>{navigation.navigate("DeadlineScreen", {data: data, count: count})}
 
-  // Пример использования
+    fetchData(TASK_ID); // Передаем filterDate в качестве аргумента
+}, [TASK_ID]);
 
-  let {task, name, data, count } = route.params;
+const fetchData = async (TASK_ID) => {
+  try {
+    const supabase = createClient(
+      'https://vwatdijcodvrpykqwylv.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3YXRkaWpjb2R2cnB5a3F3eWx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI0MTY2NzUsImV4cCI6MjAyNzk5MjY3NX0.D9hltWrPhMgBu8LAtdrwg_c6A9UPCKNVMzIiWWNMLEI'
+    );
+
+    const { data: ress, error_dl } = await supabase
+      .from('Results')
+      .select('*')
+      .eq('TASK_ID', TASK_ID);
+
+    if (error_dl) {
+      throw error_dl;
+    }
+
+    // Format and extract data from the response
+    const formattedTasks = ress.map((res) => {
+      const tasks = Object.keys(res.Clipped).map((taskKey) => ({
+        question: res.Clipped[taskKey].question,
+        answer: res.Clipped[taskKey].answer,
+        correct: res.Clipped[taskKey].correct
+      }));
+
+      return {
+        name: res.Name,
+        isCollapsible: true,
+        number: 1,
+        inner: tasks
+      };
+    });
+
+    // Update the state with the formatted data
+    setLinesData(formattedTasks);
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+    setLinesData([]); // Clear the state in case of an error
+  }
+};
+
+
 
 
     const handlePress = () => {
@@ -61,113 +91,53 @@ function ResultsScreen({route, navigation}) {
     }
   
   
-    const [collapsedItems, setCollapsedItems] = useState(Array(3).fill(true));
-  
-    const toggleCollapse = (index) => {
-      const newCollapsedItems = [...collapsedItems];
-      newCollapsedItems[index] = !newCollapsedItems[index];
-      setCollapsedItems(newCollapsedItems);
+    // Inside ResultsScreen component
+const [collapsedItems, setCollapsedItems] = useState(Array(linesData.length).fill(true)); // Ensure collapsedItems length matches linesData length
+
+// Define toggleCollapse function
+const toggleCollapse = (index) => {
+  setCollapsedItems((prevState) => {
+    const newCollapsedItems = [...prevState];
+    newCollapsedItems[index] = !newCollapsedItems[index];
+    return newCollapsedItems;
+  });
+};
+    const TASK_ID = id;
+    
+  const Line = ({name, number, isCollapsible, inner, collapse, index, score}) => {
+    const handleCollapse = () => {
+      // Call the collapse function passed from props
+      collapse(index);
     };
   
-    
-  // const linesData_DeadlineTask = [
-  //   { 
-  //     date: "02.04.2024", 
-  //     time: '', 
-  //     isCollapsible: true, 
-  //     index: 1, 
-  //     number: "1",
-  //     collapse: () => {toggleCollapse(1)}, // Передаем toggleCollapse с нужным индексом
-  //     inner: {
-  //       name_1: "Микроэкономика",
-  //       task_1: "КР",
-  //       theme_1: "4-6 (до картеля)",
-  //       addTheme_1: "+Тема 7 - разбор",
-  //       name_2: "Вышмат",
-  //       task_2: "СР",
-  //       theme_2: "Посмотреть фото",
-  //       addTheme_2: "",
-  //       name_3: "ИБГ",
-  //       task_3: "Доклады",
-  //       theme_3: "Посмотреть фото",
-  //       addTheme_3: "",
-  //     },
-  //   },
-  //   { 
-  //     date: "03.04.2024",
-  //     time: "10:05", 
-  //     isCollapsible: true, 
-  //     index: 2, 
-  //     number: "5",
-  //     collapse: () => {toggleCollapse(2)}, // Передаем toggleCollapse с нужным индексом
-  //     inner: {
-  //       name_1: "Микроэкономика",
-  //       task_1: "КР",
-  //       theme_1: "4-6 (до картеля)",
-  //       addTheme_1: "+Тема 7 - разбор",
-  //       name_2: "Вышмат",
-  //       task_2: "СР",
-  //       theme_2: "Посмотреть фото",
-  //       addTheme_2: "",
-  //       name_3: "ИБГ",
-  //       task_3: "Доклады",
-  //       theme_3: "Посмотреть фото",
-  //       addTheme_3: "",
-  //     },
-  //   },
-  //   { date: "21.04.2024", time: "10:05", isCollapsible: false, index: 3, number: "5" },
-  //   { date: "21.26.2024", time: "10:05", isCollapsible: false, index: 4, number: "5" },
-  //   { date: "21.26.2024", time: "10:05", isCollapsible: false, index: 5, number: "5" },
-  //   // Добавьте другие объекты данных, если необходимо
-  // ];
-  
-  
-    
-    const Line = ({name, time, number, isCollapsible, collapse, index, inner}) => {
-      // Получаем текущую дату
-      // const currentDate = new Date();
-      // const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-      // const currentDay = currentDate.getDate().toString().padStart(2, '0');    
-      // const currentYear = currentDate.getFullYear();
-    
-      // // Преобразуем дату в формат "ДД.ММ.ГГГГ"
-      // const formattedCurrentDate = `${currentDay}.${currentMonth}.${currentYear}`;
-    
-      // // Преобразуем переданную дату в формат "ДД.ММ.ГГГГ"
-  
-      // const formattedDate = date;
-  
-    
-      // // Определяем текст для отображения в зависимости от сравнения
-      // let displayText = '';
-      // if (formattedDate === formattedCurrentDate) {
-      //   displayText = 'СЕГОДНЯ';
-      // } else {
-      //   tomorrowDay = currentDate.getDate()+1;
-      //   tomorrowDay = tomorrowDay.toString().padStart(2, '0')
-      //   const formattedTomorrowDate = `${tomorrowDay}.${currentMonth}.${currentYear}`;
-    
-      //   if (formattedDate === formattedTomorrowDate) {
-      //     displayText = 'ЗАВТРА';
-      //   } else {
-      //     // Если не "СЕГОДНЯ" и не "ЗАВТРА", то отображаем просто дату
-      //     displayText = date;
-      //   }
-      // }
-    
-      return (
-        <TouchableOpacity
+    return (
+      <TouchableOpacity
         style={styles.DynamicContainer}
-        onPress={handlePress} // Теперь используем toggleCollapse из объекта inner
+        onPress={handleCollapse} // Call the handleCollapse function when pressed
       >
-          <View style={styles.contHeader}>
-            <Text style={styles.deadlineDay}>{name}</Text>
-            <Text style={styles.deadlineDay}>{inner.score}</Text>
-          </View>
-          <Text style={styles.headerBlack}>{inner.task}</Text>
-          <View style={styles.results}>
-            <Text style={styles.subtitle}>Посмотреть заметки</Text><Text style={styles.deadlineDay}>↘</Text>
-          </View>
+        <View style={styles.contHeader}>
+          <Text style={styles.deadlineDay}>{name}</Text>
+          <Text style={styles.deadlineDay}>{score}</Text>
+        </View>
+        <Text style={styles.headerBlack}>{null}</Text>
+        <Collapsible collapsed={collapsedItems[index]}>
+  <View>
+    {/* Iterate over each task in the inner object */}
+    {Object.keys(inner).map((taskKey) => (
+      <View key={taskKey}>
+        <Text style={styles.deadlineTime}>Вопрос {parseInt(taskKey)+1}: {inner[taskKey].question}</Text>
+        <Text style={styles.deadlineTime}>Ответ: {inner[taskKey].answer}</Text>
+        <Text style={styles.deadlineTime}>Правильный: {inner[taskKey].correct}</Text>
+        <Text></Text><Text></Text>
+      </View>
+    ))}
+  </View>
+</Collapsible>
+
+        <View style={styles.results}>
+          <Text style={styles.subtitle}>Посмотреть заметки</Text>
+          <Text style={styles.deadlineDay}>↘</Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -186,11 +156,11 @@ function ResultsScreen({route, navigation}) {
         <View style={styles.TasksContainer}>
           <View style={styles.contHeader}>
             <Text style={styles.headerBlack}>{name}</Text>
-            <Text style={styles.headerBlack}>{task}</Text>
+            <Text style={styles.deadlineDay}>{task}</Text>
           </View>
           <ScrollView style={styles.scrollableContainerTasks}>
           {linesData.map((data, index) => (
-              <Line key={index} {...data} />
+               <Line key={index} {...data} collapse={() => toggleCollapse(index)} index={index} />
             ))}
           </ScrollView>
         </View>

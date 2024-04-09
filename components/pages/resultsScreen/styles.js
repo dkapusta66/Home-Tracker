@@ -62,6 +62,24 @@ const styles = StyleSheet.create({
       paddingVertical: '5%',
       backgroundColor: '#fff',
     },
+    TaskPZButton: {
+      marginTop: '5%',
+      width: '100%',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignSelf: 'center',
+      borderRadius: 25,
+      paddingHorizontal: '5%',
+      paddingVertical: '5%',
+      backgroundColor: '#fff',
+    },
+    PZCollapsedElement:{
+      backgroundColor: colors.secondary,
+      marginTop: '5%',
+      paddingHorizontal: '2%',
+      paddingVertical: '2%',
+      borderRadius: 15
+    },
     results:{
       marginTop: '0%',
       width: '100%',
@@ -80,7 +98,6 @@ const styles = StyleSheet.create({
     deadlineTime:{
       color: '#000',
       fontSize: 15,
-      alignSelf: 'flex-end',
       fontWeight: '900',
     },
     deadlineNumber:{

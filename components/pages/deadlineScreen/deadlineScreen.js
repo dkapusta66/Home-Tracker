@@ -14,7 +14,6 @@ function DeadlineScreen({route, navigation}) {
 
   let { data, count } = route.params;
 
-
   function convertDateToISO(dateString) {
     // Разбиваем строку на части по точке
     const parts = dateString.split('.');
@@ -82,7 +81,7 @@ const fetchData = async (filterDate) => {
   }
 };
 
-
+ 
 const Line = ({ name, time, number, isCollapsible, id, inner }) => {
   // Проверяем наличие объекта inner и свойства task
   const task = inner;
@@ -90,7 +89,7 @@ const Line = ({ name, time, number, isCollapsible, id, inner }) => {
   return (
       <TouchableOpacity
           style={styles.DynamicContainer}
-          onPress={() => { handler(task, name, data, count) }}
+          onPress={() => { handler(task, name, data, count, id) }}
       >
           <View style={styles.contHeader}>
               <Text style={styles.deadlineDay}>{name}</Text>
@@ -125,7 +124,7 @@ const Line = ({ name, time, number, isCollapsible, id, inner }) => {
       setCollapsedItems(newCollapsedItems);
     };
   
-    handler = (task, name, data, count)=>{navigation.navigate('resultsScreen', {task: task, name: name, data: data, count:count}); count = 0; data = " ";}    
+    handler = (task, name, data, count, id)=>{navigation.navigate('resultsScreen', {task: task, name: name, data: data, count:count, id:id}); count = 0; data = " ";}    
 
   
     return (
