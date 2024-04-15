@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useFonts } from 'expo-font';
-import { View, Text, SafeAreaView, TouchableOpacity, Alert, ScrollView} from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Alert, ScrollView, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -147,6 +147,15 @@ const Line = ({ name, time, number, isCollapsible, id, inner }) => {
           {linesData.map((data, index) => (
               <Line key={index} {...data} />
             ))}
+            {!linesData || linesData.length === 0 && 
+            <View style={{justifyContent: 'center', paddingVertical: '20%'}}>
+              <Text style={styles.subtitle}>ДЗ нет</Text>
+              <Text style={styles.headerBlackCentered}>Свободен, пахарь</Text>
+              <Image
+                source={require('../../../assets/ui-shigure-ui-chan.gif')}
+                style={{height: 250, width: 'auto'}} // Укажите размеры гифки
+              />
+            </View>}
           </ScrollView>
         </View>
         <TouchableOpacity style={styles.BackButton} onPress={()=>{navigation.navigate("HomeScreen")}}>

@@ -34,7 +34,7 @@ function HomeScreen({ navigation }) {
       const { data: deadlines, error_dl } = await supabase
         .from('Deadlines')
         .select('Date')
-        .eq('Task-Type', 'Homework');
+        .eq('TaskType', 'Homework');
 
       if (error_dl) {
         throw error_dl;
@@ -182,6 +182,7 @@ function HomeScreen({ navigation }) {
             <Text style={styles.subtitle}>Посмотреть все</Text>
           </View>
           </TouchableOpacity>
+
       </SafeAreaView>
   );
 }

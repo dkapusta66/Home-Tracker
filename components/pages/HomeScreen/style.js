@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     tasksSubtitleRed: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: colors.primary,
+      color: colors.test_color,
     },
     tasksSubtitleGreen: {
       fontSize: 20,

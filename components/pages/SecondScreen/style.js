@@ -96,6 +96,10 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    PZTask:{
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+    },
     scrollableContainerDeadline:{
       marginBottom: '5%'
     },
@@ -129,7 +133,8 @@ const styles = StyleSheet.create({
       marginTop: '5%',
       paddingHorizontal: '2%',
       paddingVertical: '2%',
-      borderRadius: 15
+      borderRadius: 15,
+      flexDirection: 'column'
     },
     deadlineDay:{
       color: '#000',
@@ -192,7 +197,7 @@ const styles = StyleSheet.create({
       fontSize: 15,
       fontWeight: 'bold',
       color: "#fff",
-      alignSelf: 'center'
+      // alignSelf: 'center'
     },
     tasksSubtitle: {
       fontSize: 20,
@@ -202,13 +207,12 @@ const styles = StyleSheet.create({
     tasksSubtitleRed: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: colors.primary
+      color: colors.test_color
     },
     tasksSubtitleGreen: {
       fontSize: 20,
       fontWeight: 'bold',
       color: "#72C55D",
-  
     },
     button: {
       flexDirection: 'row',

@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     tasksSubtitleRed: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: "#FFA18A",
+      color: colors.test_color,
     },
     BackButton:{
         backgroundColor: colors.secondary,

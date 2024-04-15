@@ -95,6 +95,12 @@ const styles = StyleSheet.create({
       fontSize: 35,
       fontWeight: 'bold',
       color: "#000",
+    },    
+    headerBlackCentered: {
+      fontSize: 35,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: "#000",
     },
     headerPlus: {
       fontSize: 40,
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     tasksSubtitleRed: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: "#FFA18A",
+      color: colors.test_color,
     },
     BackButton:{
         backgroundColor: colors.secondary,
