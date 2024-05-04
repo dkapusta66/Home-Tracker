@@ -144,15 +144,9 @@ const toggleCollapse = (index) => {
   
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.groupContainer}>
-          <Text style={styles.header}>23ДЦИ-1</Text>
-          <Text style={styles.header}>п.2</Text>
-          <TouchableOpacity onPress={handlePress} style={styles.button}>
-            <View style={styles.rectangle}></View>
-            <View style={styles.rectangle}></View>
-            <View style={styles.rectangle}></View>
-          </TouchableOpacity>
-        </View>
+        
+        <GroupContainer handlePress={handlePress} />
+
         <View style={styles.TasksContainer}>
           <View style={styles.contHeader}>
             <Text style={styles.headerBlack}>{name}</Text>

@@ -1,8 +1,10 @@
 
 const colors = {
-    primary: '#FFA18A',
-    secondary: '#52716B',
-    test_color: 'red'
+    background: '#A4A3D7',
+    primary: '#6455A1',
+    secondary: '#6478BE',
+    test_color: '#E57777',
+    green_color: '#72C55D'
   };
 
 export default colors;

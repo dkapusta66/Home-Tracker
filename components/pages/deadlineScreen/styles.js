@@ -6,32 +6,10 @@ import colors from '../../ColorPalette/colorPalette';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#000',
+      backgroundColor: colors.background,
       alignItems: 'center',
       paddingTop:StatusBar.currentHeight
     },
-    groupContainer: {
-      width: '90%',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      backgroundColor: colors.secondary,
-      alignItems: 'center',
-      paddingVertical: "4%",
-      paddingHorizontal: "4%",
-      marginTop: "4%",
-      borderRadius: 20,
-    },
-    button: {
-        flexDirection: 'row',
-      },
-      rectangle: {
-        width: 8,
-        height: 40,
-        backgroundColor: colors.primary,
-        borderRadius: 12,
-        transform: 'rotate(25deg)',
-        marginHorizontal: 5,
-      },
     TasksContainer: {
       width: '90%',
       height: '75%',
