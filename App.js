@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-
+console.log('Коммит для теста');
   return (
     <NavigationContainer>
       <Stack.Navigator>
